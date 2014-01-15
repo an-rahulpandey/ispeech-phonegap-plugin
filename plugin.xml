@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='utf-8'?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    id="com.applicationnexus.plugins.ttsandspeechrecognition"
+    version="0.0.1">
+    
+    <name>TTSAndSpeechRecognition</name>
+    <description>Convert Speech to Text</description>
+    <engines><engine name="cordova" version=">=3.0.0" /></engines>
+    
+    <js-module src="www/TTSAndSpeechRecognitionPlugin.js" name="TTSAndSpeechRecognitionPlugin">
+        <clobbers target="cordova.TTSAndSpeechRecognitionPlugin" />
+    </js-module>
+    
+    <!-- iOS -->
+    
+    <platform name="ios">
+        
+        <config-file target="config.xml" parent="/*">
+            <feature name="TTSAndSpeechRecognitionPlugin">
+                <param name="ios-package" value="TTSAndSpeechRecognitionPlugin"/>
+                <param name="onload" value="true" />
+            </feature>
+        </config-file>
+        
+        <header-file src="src/ios/ISAppDelegate.h" />
+        <source-file src="src/ios/ISAppDelegate.m" />
+        
+        <header-file src="src/ios/iSpeechSDK.h" />
+        <header-file src="src/ios/ISSpeechRecognition.h" />
+        <header-file src="src/ios/ISSpeechRecognitionLocales.h" />
+        <header-file src="src/ios/ISSpeechRecognitionResult.h" />
+        <header-file src="src/ios/ISSpeechSynthesis.h" />
+        <header-file src="src/ios/ISSpeechSynthesisVoices.h" />
+        
+        <header-file src="src/ios/ISViewController.h" />
+        <source-file src="src/ios/ISViewController.m" />
+        
+        <header-file src="src/ios/TTSAndSpeechRecognitionPlugin.h" />
+        <source-file src="src/ios/TTSAndSpeechRecognitionPlugin.m" />
+        
+        <!-- system frameworks -->
+        <source-file src="src/ios/frameworks/libSpeechToText.a" framework="true" />
+        <framework src='AVFoundation.framework' />
+        <framework src='AudioToolbox.framework' />
+        <framework src='CoreAudio.framework' />
+        <framework src='CFNetwork.framework' />
+        
+        <!-- resource bundles -->
+        <resource-file src="src/ios/resources/iSpeechSDK.bundle" />
+        
+    </platform>
+    
+    
+    <!-- Android -->
+    
+    <platform name="android">
+    </platform>
+    
+</plugin>
