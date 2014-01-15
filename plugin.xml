@@ -40,7 +40,7 @@
         <source-file src="src/ios/TTSAndSpeechRecognitionPlugin.m" />
         
         <!-- system frameworks -->
-        <source-file src="src/ios/frameworks/libSpeechToText.a" framework="true" />
+        <source-file src="src/ios/frameworks/libiSpeechSDK.a" framework="true" />
         <framework src='AVFoundation.framework' />
         <framework src='AudioToolbox.framework' />
         <framework src='CoreAudio.framework' />
