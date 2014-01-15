@@ -45,6 +45,9 @@
         <framework src='AudioToolbox.framework' />
         <framework src='CoreAudio.framework' />
         <framework src='CFNetwork.framework' />
+        <framework src='Security.framework' />
+        <framework src='CFNetwork.framework' />
+        <framework src='SystemConfiguration.framework' />
         
         <!-- resource bundles -->
         <resource-file src="src/ios/resources/iSpeechSDK.bundle" />
