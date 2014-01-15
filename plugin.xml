@@ -1,27 +1,26 @@
 <?xml version='1.0' encoding='utf-8'?>
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    id="com.applicationnexus.plugins.ttsandspeechrecognition"
+    id="org.applicationnexus.plugins.ispeechplugin"
     version="0.0.1">
     
-    <name>TTSAndSpeechRecognition</name>
-    <description>Convert Speech to Text</description>
+    <name>iSpeechPlugin</name>
+    <description>Phonegap Plugin for iSpeech</description>
     <engines><engine name="cordova" version=">=3.0.0" /></engines>
     
-    <js-module src="www/TTSAndSpeechRecognitionPlugin.js" name="TTSAndSpeechRecognitionPlugin">
-        <clobbers target="cordova.TTSAndSpeechRecognitionPlugin" />
+    <js-module name="iSpeechPlugin" src="www/iSpeechPlugin.js">
+        <clobbers target="cordova.iSpeechPlugin" />
     </js-module>
     
-    <!-- iOS -->
-    
     <platform name="ios">
-        
-        <config-file target="config.xml" parent="/*">
-            <feature name="TTSAndSpeechRecognitionPlugin">
-                <param name="ios-package" value="TTSAndSpeechRecognitionPlugin"/>
-                <param name="onload" value="true" />
+        <config-file parent="/*" target="config.xml">
+            <feature name="iSpeechPlugin">
+                <param name="ios-package" value="CDViSpeechPlugin" />
             </feature>
         </config-file>
+        
+        <header-file src="src/ios/CDViSpeechPlugin.h" />
+        <source-file src="src/ios/CDViSpeechPlugin.m" />
         
         <header-file src="src/ios/ISAppDelegate.h" />
         <source-file src="src/ios/ISAppDelegate.m" />
@@ -40,7 +39,7 @@
         <source-file src="src/ios/TTSAndSpeechRecognitionPlugin.m" />
         
         <header-file src="src/ios/ISTextInputAlertView.h" />
-        <source-file src="src/ios/ISTextInputAlertView.m" />        
+        <source-file src="src/ios/ISTextInputAlertView.m" />
         
         <!-- system frameworks -->
         <source-file src="src/ios/frameworks/libiSpeechSDK.a" framework="true" />
@@ -53,7 +52,6 @@
         <resource-file src="src/ios/resources/iSpeechSDK.bundle" />
         
     </platform>
-    
     
     <!-- Android -->
     
