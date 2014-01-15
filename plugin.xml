@@ -35,9 +35,7 @@
         <header-file src="src/ios/ISViewController.h" />
         <source-file src="src/ios/ISViewController.m" />
         
-        <header-file src="src/ios/TTSAndSpeechRecognitionPlugin.h" />
-        <source-file src="src/ios/TTSAndSpeechRecognitionPlugin.m" />
-        
+      
         <header-file src="src/ios/ISTextInputAlertView.h" />
         <source-file src="src/ios/ISTextInputAlertView.m" />
         
