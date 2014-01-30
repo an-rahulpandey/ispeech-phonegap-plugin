@@ -18,7 +18,9 @@
                 <param name="ios-package" value="CDViSpeechPlugin" />
             </feature>
         </config-file>
-        
+		
+        <!-- header and source file -->
+		
         <header-file src="src/ios/CDViSpeechPlugin.h" />
         <source-file src="src/ios/CDViSpeechPlugin.m" />
         
