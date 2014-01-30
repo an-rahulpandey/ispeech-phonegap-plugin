@@ -14,7 +14,7 @@
     
     <platform name="ios">
         <config-file parent="/*" target="config.xml">
-            <feature name="iSpeechPlugin">
+            <feature name="CDViSpeechPlugin">
                 <param name="ios-package" value="CDViSpeechPlugin" />
             </feature>
         </config-file>
