@@ -1,31 +1,30 @@
 <?xml version='1.0' encoding='utf-8'?>
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    id="org.applicationnexus.plugins.ispeechplugin"
-    version="0.0.1">
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        id="me.rahul.plugins.ispeechplugin"
+        version="1.0">
     
     <name>iSpeechPlugin</name>
-    <description>Phonegap Plugin for iSpeech</description>
-    <engines><engine name="cordova" version=">=3.0.0" /></engines>
+    
+    <description>Cordova/Phonegap Plugin for iSpeech SDK</description>
+    
     
     <js-module name="iSpeechPlugin" src="www/iSpeechPlugin.js">
-        <clobbers target="cordova.iSpeechPlugin" />
+        <clobbers target="window.iSpeechPlugin" />
     </js-module>
     
     <platform name="ios">
         <config-file parent="/*" target="config.xml">
-            <feature name="CDViSpeechPlugin">
-                <param name="ios-package" value="CDViSpeechPlugin" />
+            <feature name="iSpeechPlugin">
+                <param name="ios-package" value="iSpeechPlugin" />
             </feature>
         </config-file>
 		
         <!-- header and source file -->
 		
-        <header-file src="src/ios/CDViSpeechPlugin.h" />
-        <source-file src="src/ios/CDViSpeechPlugin.m" />
+        <header-file src="src/ios/iSpeechPlugin.h" />
+        <source-file src="src/ios/iSpeechPlugin.m" />
         
-        <header-file src="src/ios/ISAppDelegate.h" />
-        <source-file src="src/ios/ISAppDelegate.m" />
         
         <header-file src="src/ios/iSpeechSDK.h" />
         <header-file src="src/ios/ISSpeechRecognition.h" />
@@ -34,15 +33,10 @@
         <header-file src="src/ios/ISSpeechSynthesis.h" />
         <header-file src="src/ios/ISSpeechSynthesisVoices.h" />
         
-        <header-file src="src/ios/ISViewController.h" />
-        <source-file src="src/ios/ISViewController.m" />
-        
-      
-        <header-file src="src/ios/ISTextInputAlertView.h" />
-        <source-file src="src/ios/ISTextInputAlertView.m" />
         
         <!-- system frameworks -->
         <source-file src="src/ios/frameworks/libiSpeechSDK.a" framework="true" />
+        
         <framework src='AVFoundation.framework' />
         <framework src='AudioToolbox.framework' />
         <framework src='CoreAudio.framework' />
@@ -52,6 +46,7 @@
         <framework src='SystemConfiguration.framework' />
         
         <!-- resource bundles -->
+        
         <resource-file src="src/ios/resources/iSpeechSDK.bundle" />
         
     </platform>
