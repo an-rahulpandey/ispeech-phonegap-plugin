@@ -19,7 +19,7 @@
     NSError *error;
     if (args.count > 0) {
         NSMutableDictionary *options = [[NSMutableDictionary alloc] init];
-        NSString *msg = [options objectForKey:@"text"];
+        NSString *msg = [options objectForKey:@"msg"];
         NSString *voice = [options objectForKey:@"voice"];
         NSInteger bitrate = [[options objectForKey:@"bitrate"] integerValue];
         NSInteger speed = [[options objectForKey:@"speed"] integerValue];
@@ -51,7 +51,7 @@
     ISSpeechRecognition *recognition = [[ISSpeechRecognition alloc] init];
     
     NSArray *args = [command arguments];
-
+    NSLog(@"[iSpeechPlugin] Arguments = %@",args);
     if (args.count > 0) {
         NSMutableDictionary *options = [[NSMutableDictionary alloc] init];
         
@@ -101,6 +101,7 @@
     sdk.APIKey = appKey;
     plresult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
     [self.commandDelegate sendPluginResult:plresult callbackId:@"Ok"];
+    NSLog(@"[iSpeechPlugin] Init Called");
 }
 
 @end
