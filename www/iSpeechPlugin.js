@@ -1,4 +1,4 @@
-cordova.define("me.rahul.plugins.ispeechplugin.iSpeechPlugin", function(require, exports, module) { var cordova = require('cordova'),
+var cordova = require('cordova'),
     exec = require('cordova/exec');
 
 var iSpeechPlugin = function() {
@@ -8,8 +8,8 @@ var iSpeechPlugin = function() {
 iSpeechPlugin.prototype = {
 
             init:function(speechkey) {
-                console.log("speechkey = "+speechkey);
-                    cordova.exec(null,null,"iSpeechPlugin","init",[speechkey]);
+                //console.log("speechkey = "+speechkey);
+                cordova.exec(null,null,"iSpeechPlugin","init",[speechkey]);
             },
     
             speak: function(callback, errCallbac, options) {
@@ -26,7 +26,7 @@ iSpeechPlugin.prototype = {
                             for (var key in defaults){
                                 if(options[key] != undefined) {
                                     defaults[key] = options[key];
-                                    console.log("options = "+defaults[key]);
+                                    //console.log("options = "+defaults[key]);
                                 }
                             }
                     }
@@ -59,5 +59,3 @@ iSpeechPlugin.prototype = {
 var iSpeechPlugin = new iSpeechPlugin();
 
 module.exports = iSpeechPlugin;
-
-});
