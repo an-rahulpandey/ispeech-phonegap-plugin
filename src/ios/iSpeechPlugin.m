@@ -19,10 +19,10 @@
     NSError *error;
     if (args.count > 0) {
         NSMutableDictionary *options = [[NSMutableDictionary alloc] init];
-        NSString *msg = [options objectForKey:@"msg"];
-        NSString *voice = [options objectForKey:@"voice"];
-        NSInteger bitrate = [[options objectForKey:@"bitrate"] integerValue];
-        NSInteger speed = [[options objectForKey:@"speed"] integerValue];
+        NSString *msg = [args objectForKey:@"msg"];
+        NSString *voice = [args objectForKey:@"voice"];
+        NSInteger bitrate = [[args objectForKey:@"bitrate"] integerValue];
+        NSInteger speed = [[args objectForKey:@"speed"] integerValue];
         
         NSLog(@"[iSpeechPlugin] Arguments = %@",args);
         ISSpeechSynthesis *synthesis = [[ISSpeechSynthesis alloc] initWithText:msg];
@@ -55,9 +55,9 @@
     if (args.count > 0) {
         NSMutableDictionary *options = [[NSMutableDictionary alloc] init];
         
-        BOOL silenceDetection = [[options objectForKey:@"silenceDetection"] boolValue];
-        NSString *locale = [options objectForKey:@"locale"];
-        NSTimeInterval timeout = [[options objectForKey:@"timeout"] intValue];
+        BOOL silenceDetection = [[args objectForKey:@"silenceDetection"] boolValue];
+        NSString *locale = [args objectForKey:@"locale"];
+        NSTimeInterval timeout = [[args objectForKey:@"timeout"] intValue];
         
         [recognition setDelegate:self];
         [recognition setSilenceDetectionEnabled:silenceDetection];
