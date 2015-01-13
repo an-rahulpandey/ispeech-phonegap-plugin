@@ -11,7 +11,7 @@ https://github.com/jcesarmobile/my-phonegap-plugins/tree/master/iOS/iSpeechPlugi
 
 1)Initialize the plugin by calling this method - 
 
-	iSpeechPlugin.init("YouriSpeechSDKkey");
+	window.iSpeechPlugin.init("YouriSpeechSDKkey");
 
 2)Speech Recognition (Not Tested Yet)-
 ```javascript
@@ -21,7 +21,7 @@ https://github.com/jcesarmobile/my-phonegap-plugins/tree/master/iOS/iSpeechPlugi
                     timeout: 100
                   };
 
-	iSpeechPlugin.recognize(function(result){alert("Output = "+result);},
+    window.iSpeechPlugin.recognize(function(result){alert("Output = "+result);},
 									function(){alert("sorry didn't catch that");},
                                     options);
 ```
@@ -34,6 +34,6 @@ https://github.com/jcesarmobile/my-phonegap-plugins/tree/master/iOS/iSpeechPlugi
                     bitrate: 48,
                     speed  : 0
     };
-
-	iSpeechPlugin.speak(success,error,options);
+    
+    window.iSpeechPlugin.speak(success,error,options);
 ```	
