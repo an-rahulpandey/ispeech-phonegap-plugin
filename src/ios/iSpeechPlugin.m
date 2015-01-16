@@ -18,46 +18,46 @@
     NSArray *args = [command arguments];
     NSError *error;
     if (args.count > 0) {
-        NSMutableDictionary *options = [[NSMutableDictionary alloc] init];
-        NSString *msg = [args objectForKey:@"msg"];
-        NSString *voice = [args objectForKey:@"voice"];
-        NSInteger bitrate = [[args objectForKey:@"bitrate"] integerValue];
-        NSInteger speed = [[args objectForKey:@"speed"] integerValue];
+        NSMutableDictionary *options = [args objectAtIndex:0];
+        NSString *msg = [options objectForKey:@"msg"];
+        NSString *voice = [options objectForKey:@"voice"];
+        NSInteger bitrate = [[options objectForKey:@"bitrate"] integerValue];
+        NSInteger speed = [[options objectForKey:@"speed"] integerValue];
         
         NSLog(@"[iSpeechPlugin] Arguments = %@",args);
         ISSpeechSynthesis *synthesis = [[ISSpeechSynthesis alloc] initWithText:msg];
-
+        
         [synthesis setVoice:voice];
         [synthesis setBitrate:bitrate];
         [synthesis setSpeed:speed];
-
-    
+        
+        
         [synthesis setDelegate:self];
-    
-       if(![synthesis speak:&error]) {
-           NSLog(@"Error = %@",[error description]);
-           [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:[error description]] callbackId:command.callbackId];
-       } else {
+        
+        if(![synthesis speak:&error]) {
+            NSLog(@"Error = %@",[error description]);
+            [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:[error description]] callbackId:command.callbackId];
+        } else {
             pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
-           [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
-       }
+            [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+        }
     } else {
         [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"Invalid Arguments"] callbackId:command.callbackId];
     }
 }
 
 - (void)recognize:(CDVInvokedUrlCommand*)command {
-
+    
     ISSpeechRecognition *recognition = [[ISSpeechRecognition alloc] init];
     
     NSArray *args = [command arguments];
     NSLog(@"[iSpeechPlugin] Arguments = %@",args);
     if (args.count > 0) {
-        NSMutableDictionary *options = [[NSMutableDictionary alloc] init];
+        NSMutableDictionary *options = [args objectAtIndex:0];
         
-        BOOL silenceDetection = [[args objectForKey:@"silenceDetection"] boolValue];
-        NSString *locale = [args objectForKey:@"locale"];
-        NSTimeInterval timeout = [[args objectForKey:@"timeout"] intValue];
+        BOOL silenceDetection = [[options objectForKey:@"silenceDetection"] boolValue];
+        NSString *locale = [options objectForKey:@"locale"];
+        NSTimeInterval timeout = [[options objectForKey:@"timeout"] intValue];
         
         [recognition setDelegate:self];
         [recognition setSilenceDetectionEnabled:silenceDetection];
@@ -66,25 +66,25 @@
         }
         
         [recognition setFreeformType:ISFreeFormTypeDictation];
-    
+        
         [recognition listenAndRecognizeWithTimeout:timeout handler:^(NSError *error, ISSpeechRecognitionResult *result, BOOL cancelledByUser) {
-        
-        if (cancelledByUser) {
-            [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"Cancelled by User"] callbackId:command.callbackId];
-        } else {
-            if(!error){
-                if (result.confidence < 0.3) {
-                    [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"No Confidence"] callbackId:command.callbackId];
-                } else {
-                    NSLog(@"Output = %@",result.text);
-                    [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:result.text] callbackId:command.callbackId];
-                }
-                
+            
+            if (cancelledByUser) {
+                [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"Cancelled by User"] callbackId:command.callbackId];
             } else {
-                [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"error recognicing"] callbackId:command.callbackId];
+                if(!error){
+                    if (result.confidence < 0.3) {
+                        [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"No Confidence"] callbackId:command.callbackId];
+                    } else {
+                        NSLog(@"Output = %@",result.text);
+                        [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:result.text] callbackId:command.callbackId];
+                    }
+                    
+                } else {
+                    [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"error recognizing"] callbackId:command.callbackId];
+                }
             }
-        }
-        
+            
         }];
     } else {
         [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"Invalid Arguments"] callbackId:command.callbackId];
@@ -93,7 +93,6 @@
 
 -(void)init:(CDVInvokedUrlCommand *)command
 {
-    NSLog(@"[iSpeechPlugin] Init Called");
     CDVPluginResult *plresult = nil;
     NSString* appKey = [command.arguments objectAtIndex:0];
     [[iSpeechSDK sharedSDK] setAPIKey:appKey];
@@ -101,7 +100,6 @@
     sdk.APIKey = appKey;
     plresult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
     [self.commandDelegate sendPluginResult:plresult callbackId:@"Ok"];
-    NSLog(@"[iSpeechPlugin] Init Called");
 }
 
 @end
